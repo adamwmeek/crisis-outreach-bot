@@ -1,18 +1,17 @@
 import os
 import logging as saves_logger
+from dotenv import load_dotenv
 
 import discord
 from discord.ext import commands
 
 KEYWORDS_FILENAME = 'keywords.txt'
 RESPONSE_FILENAME = 'response.txt'
-VOLUNTEER_CHANNEL_ID = 820813652705673227
 VOLUNTEER_MESSAGE = 'I picked up on a keyword in conversation: '
 
-from dotenv import load_dotenv
 load_dotenv()
-# TODO: Remember to remove me!
 TOKEN = os.getenv('BOT_TOKEN')
+VOLUNTEER_CHANNEL_ID = int(os.getenv('VOLUNTEER_CHANNEL_ID'))
 
 saves_logger.basicConfig(level=saves_logger.DEBUG, format='%(asctime)s %(message)s',
                     handlers=[saves_logger.FileHandler("saves_bot.log"), saves_logger.StreamHandler()])
