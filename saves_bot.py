@@ -67,7 +67,7 @@ async def on_message(message):
         return
 
     # If we see a keyword in any message, take the following actions:
-    if any([keyword in message.content for keyword in KEYWORDS]):
+    if any([word in message.content for word in KEYWORDS]):
         saves_logger.debug(f'Picked up on keyword in channel {message.channel.name} in message: {message.content}')
 
         # Send crisis info to author of message
