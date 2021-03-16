@@ -27,5 +27,4 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Setup python
-      - name: Run python tests
         uses: onichandame/python-test-action@master
