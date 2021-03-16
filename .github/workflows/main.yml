@@ -15,8 +15,8 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
+  # This workflow contains a single job called "test"
+  test:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -27,9 +27,5 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Setup python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
       - name: Run python tests
-        run: |
-          python saves_bot_tests.py
+        uses: onichandame/python-test-action@master
