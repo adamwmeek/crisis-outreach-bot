@@ -10,6 +10,7 @@ bot = commands.Bot(command_prefix='$')
 client = discord.Client()
 responder = SavesResponder()
 
+""" This code decorates the on_message event and looks for keywords to react to (in the right conditons). """
 @client.event
 async def on_message(message):
     # Ignore messages in volunteer channel
@@ -21,13 +22,13 @@ async def on_message(message):
         return
 
     # If we see a keyword in any message, take the following actions:
-    if any([word in message.content for word in responder.KEYWORDS]):
+    if any([word in message.content.lower() for word in responder.KEYWORDS]):
         saves_logger.debug(f'Picked up on keyword in channel {message.channel.name} in message: {message.content}')
 
         # Send crisis info to author of message
         await message.author.send(responder.RESPONSE_MESSAGE)
 
-        # Put a reply in that channel
+        # Put a reply in that channel? (We're still discussing if we want this)
         # await message.channel.send(RESPONSE_MESSAGE)
 
         # Let the volunteer channel know of the incident

@@ -11,7 +11,8 @@ class SavesResponder:
 
             self.RESPONSE_MESSAGE = ''.join(map(str, contents))
             saves_logger.debug(f'Loaded response: {self.RESPONSE_MESSAGE}')
-            return self.RESPONSE_MESSAGE
+
+        return self.RESPONSE_MESSAGE
 
     def _reload_keywords(self):
         self.KEYWORDS.clear()
@@ -23,6 +24,8 @@ class SavesResponder:
                 line = line.strip('\n')
                 self.KEYWORDS.append(line.lower())
                 saves_logger.debug(f'Added keyword: {line}')
+            
+        return self.KEYWORDS
 
     def _add_keyword(self, keyword):
         self.KEYWORDS.append(keyword.lower())
@@ -30,11 +33,15 @@ class SavesResponder:
         with open(self.KEYWORDS_FILENAME, 'w') as handle:
                 handle.writelines(self.KEYWORDS)
 
+        return self.KEYWORDS
+
     def _remove_keyword(self, keyword):
         self.KEYWORDS.remove(keyword.lower())
 
         with open(self.KEYWORDS_FILENAME, 'w') as handle:
                 handle.writelines(self.KEYWORDS)
+
+        return self.KEYWORDS
 
     def __init__(self):
         self.KEYWORDS_FILENAME = 'keywords.txt'
