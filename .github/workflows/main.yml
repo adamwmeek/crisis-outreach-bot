@@ -27,6 +27,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Setup python
+        uses: actions/setup-python@v2
         with:
           python-version: '3.x'
       - name: Run python tests
