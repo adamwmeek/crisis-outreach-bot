@@ -31,7 +31,7 @@ class SavesResponder:
         self.KEYWORDS.append(keyword.lower())
 
         with open(self.KEYWORDS_FILENAME, 'w') as handle:
-                handle.writelines(self.KEYWORDS)
+                handle.writelines(f'{keyword}\n' for keyword in self.KEYWORDS)
 
         return self.KEYWORDS
 
@@ -39,8 +39,8 @@ class SavesResponder:
         self.KEYWORDS.remove(keyword.lower())
 
         with open(self.KEYWORDS_FILENAME, 'w') as handle:
-                handle.writelines(self.KEYWORDS)
-
+                handle.writelines(f'{keyword}\n' for keyword in self.KEYWORDS)
+                
         return self.KEYWORDS
 
     def __init__(self):
