@@ -22,13 +22,13 @@ async def on_message(message):
     if message.author.bot:
         return
 
-    # Ignore messages sent within timeout period from same user
-    if user_timeout_list.check_if_user_in_timeout(message.author.name):
-        return
-
     # Look for commands from admins
     if any([role.name == 'Admin' for role in message.author.roles]):
         await bot.process_commands(message)
+        return
+
+    # Ignore messages sent within timeout period from same user
+    if user_timeout_list.check_if_user_in_timeout(message.author.name):
         return
 
     # If we see a keyword in any message, take the following actions:
@@ -44,14 +44,15 @@ async def on_message(message):
         # Let the volunteer channel know of the incident
         volunteer_channel = bot.get_channel(responder.VOLUNTEER_CHANNEL_ID)
         await volunteer_channel.send(responder.VOLUNTEER_MESSAGE + message.content)
+        user_timeout_list.add_user_to_timeout(message.author.name)
 
-@bot.command(name='crisis_add')
-async def add_keyword(context, keyword):
+@bot.command(brief='Adds a keyword to monitor to the lists')
+async def crisis_add(context, keyword):
     responder._add_keyword(keyword)
     await context.send(f'Adding keyword: {keyword}')
 
-@bot.command(name='crisis_remove')
-async def remove_keyword(context, keyword):
+@bot.command(brief='Removes a keyword to monitor to the lists')
+async def crisis_remove(context, keyword):
     responder._remove_keyword(keyword)
     await context.send(f'Removing keyword: {keyword}')
 

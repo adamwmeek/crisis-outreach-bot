@@ -13,6 +13,7 @@ class UserTimeout:
                 return False
             else:
                 return True
-        else:
-            self.user_table[username] = datetime.datetime.now()
-            return False
+
+    def add_user_to_timeout(self, username):
+        self.user_table[username] = datetime.datetime.now()
+        return False
